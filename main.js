@@ -1,8 +1,9 @@
-const discord = require("discord.js")
+import discord from 'discord.js'
+import init from './bot_modules/init.js'
 
 let client = new discord.Client()
 
-const init = require("./bot_modules/init")
+
 
 
 init.login(client)

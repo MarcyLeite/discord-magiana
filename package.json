@@ -3,11 +3,14 @@
   "version": "1.0.0",
   "description": "Discord Bot",
   "main": "main.js",
+  "type": "module",
   "dependencies": {
-    "discord.js": "^11.5.1",
-    "nodemon": "^2.0.4"
+    "discord.js": "^11.6.4",
+    "nodemon": "^2.0.15"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint": "^8.2.0"
+  },
   "scripts": {
     "start": "nodemon main.js"
   },

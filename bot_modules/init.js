@@ -1,40 +1,46 @@
-const fs = require("fs")
-const Command = require("./commands/classes/Command")
+import fs from 'fs'
+import Command from './commands/classes/Command.js'
 
 //getting config data from file
-let rawConfigData = fs.readFileSync("config.json")
+let rawConfigData = fs.readFileSync('config.json')
 const config = JSON.parse(rawConfigData)
 
 
 
-module.exports = {
+export default {
 
-    login: function(client) {
-        let token = process.env["DISCORD-TOKEN"]
-        client.login(token)
-        console.log("Running!")
-    },
+	login: function(client) {
+		let token = process.env['MAGIANA_TOKEN']
+		client.login(token)
+			.then(() => {
+				console.log('Running!')
+			})
+			.catch(() => {
+				console.error('Wrong Token!')
+				process.exit(1)
+			})
+	},
 
 
-    // ---- MAYBE WILL CHAGNGE ----
-    initCommands: function() {
+	// ---- MAYBE WILL CHAGNGE ----
+	initCommands: function() {
         
-        Command.setConfig(config['command-settings'])
+		Command.setConfig(config['command-settings'])
 
-        function testF(msg) {
-            console.log(msg)
-        }
+		function testF(msg) {
+			console.log(msg)
+		}
         
-        let test = new Command("Test", "test", testF, "")
-        test.toggleTestPhase()
-    },
+		let test = new Command('Test', 'test', testF)
+		test.toggleTestPhase()
+	},
 
-    commandListener: function(client){
-        client.on("message", msg => {
+	commandListener: function(client){
+		client.on('message', msg => {
 
-            Command.validateCommand(msg)
+			Command.validateCommand(msg)
 
-        })
-    }
+		})
+	}
 
 }
